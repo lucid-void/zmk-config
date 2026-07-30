@@ -3,8 +3,10 @@ include:
     shield: totem_left
   - board: xiao_ble//zmk
     shield: totem_right
-# there is no settingsreset (needed) for the XIAO
-  - board: nice_nano
+  - board: xiao_ble//zmk
+    shield: settings_reset
+  - board: nice_nano//zmk
     shield: totem_dongle
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+

@@ -4,14 +4,37 @@
  * SPDX-License-Identifier: MIT
  */
 
- #include "totem.dtsi"
+/* 1. Pull in the blueprint so kscan0 is recognized */
+#include "totem.dtsi"
 
- &kscan0 {
-     col-gpios
-         = <&xiao_d 8 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 9 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 10 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 5 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 4 GPIO_ACTIVE_HIGH>
-         ;
- };
+/* 2. Override the problematic Xiao pins using generic, harmless GPIO assignments */
+&kscan0 {
+    col-gpios
+        = <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        ;
+    row-gpios
+        = <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 0 GPIO_ACTIVE_HIGH>
+        ;
+    status = "disabled";
+};
+
+/* 3. Build a generic dummy scanning matrix for the nice_nano */
+/ {
+    dummy_kscan: kscan_1 {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
+
+    chosen {
+        zmk,kscan = &dummy_kscan;
+    };
+};
