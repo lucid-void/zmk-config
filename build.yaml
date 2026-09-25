@@ -19,15 +19,25 @@
 #
 ---
 include:
+  # Halves are peripherals now — the dongle is central
   - board: nice_nano//zmk
     shield: corne_left nice_view_adapter nice_view_gem
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
 
   - board: nice_nano//zmk
     shield: corne_right nice_view_adapter nice_view_gem
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
 
+  # Prospector dongle
+  - board: xiao_ble//zmk
+    shield: corne_dongle prospector_adapter
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
+
   - board: nice_nano//zmk
     shield: settings_reset
     artifact-name: nano_reset_settings
+
+  - board: xiao_ble//zmk
+    shield: settings_reset
+    artifact-name: xiao_reset_settings
