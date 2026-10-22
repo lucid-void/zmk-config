@@ -1,37 +1,30 @@
 # This file generates the GitHub Actions matrix.
-# For simple board + shield combinations, add them to the top level board and
-# shield arrays, for more control, add individual board + shield combinations
-# to the `include` property. You can also use the `cmake-args` property to
-# pass flags to the build command and `artifact-name` to assign a name to
-# distinguish build outputs from each other:
+# Board names follow ZMK main (Zephyr 4.1, HWMv2): in-tree boards need the
+# //zmk variant. nice_nano//zmk defaults to the v2 revision.
 #
-# board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano_v2
-#     shield: reviung41
-#   - board: nice_nano_v2
-#     shield: corne_left
-#     cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
-#     artifact-name: corne_left_with_logging
-#
+# artifact-name keeps the old, short UF2 file names instead of the
+# auto-derived "<shield>-<board>__zmk-zmk.uf2".
 ---
 include:
-  - board: seeeduino_xiao_ble #prospector dongle
+  - board: xiao_ble//zmk #prospector dongle
     shield: charybdis_dongle prospector_adapter
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
-
-  - board: nice_nano_v2
+    artifact-name: charybdis_dongle-xiao_ble
+  - board: nice_nano//zmk
     shield: charybdis_dongle
+    artifact-name: charybdis_dongle-nice_nano
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: charybdis_left
-  - board: nice_nano_v2
+    artifact-name: charybdis_left
+  - board: nice_nano//zmk
     shield: charybdis_right
+    artifact-name: charybdis_right
     
-  - board: nice_nano_v2
+  - board: xiao_ble//zmk
     shield: settings_reset
-  - board: sv
+    artifact-name: settings_reset-xiao_ble
+  - board: nice_nano//zmk
     shield: settings_reset
+    artifact-name: settings_reset-nice_nano
