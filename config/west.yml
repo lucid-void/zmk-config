@@ -20,5 +20,8 @@ manifest:
     - name: zmk-input-behavior-listener
       remote: badjeff
       revision: main
+    - name: prospector-zmk-module
+      remote: 280Zo
+      revision: main
   self:
     path: config
