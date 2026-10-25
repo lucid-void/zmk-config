@@ -1,6 +1,14 @@
 include:
+  # Direct BLE mode: left half is the BLE central and pairs straight to the host, no dongle needed.
   - board: xiao_ble//zmk
     shield: totem_left
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
+    artifact-name: totem_left_ble
+  # Dongle mode: left half is just a peripheral, paired with the prospector dongle below.
+  - board: xiao_ble//zmk
+    shield: totem_left
+    artifact-name: totem_left_dongle
+  # Right half is always a peripheral, same firmware for either mode above.
   - board: xiao_ble//zmk
     shield: totem_right
   - board: xiao_ble//zmk

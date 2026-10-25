@@ -5,7 +5,7 @@ if SHIELD_TOTEM_DONGLE
 
 config ZMK_KEYBOARD_NAME
     default "TOTEM"
-    
+
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
@@ -13,6 +13,12 @@ config ZMK_USB
     default y
 
 endif
+
+# totem_left defaults to peripheral (paired with the dongle above). To build a
+# standalone "direct BLE" left half instead, override this at the build.yaml
+# level with `cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y` (see build.yaml's
+# totem_left_ble entry) rather than changing the default here, so both modes
+# can keep being built side by side.
 
 if SHIELD_TOTEM_LEFT || SHIELD_TOTEM_RIGHT || SHIELD_TOTEM_DONGLE
 
