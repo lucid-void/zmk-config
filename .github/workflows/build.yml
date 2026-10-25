@@ -3,3 +3,29 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+
+  release:
+    name: Publish firmware to branch release
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download firmware
+        uses: actions/download-artifact@v4
+        with:
+          name: firmware
+          path: firmware
+
+      - name: Publish/update "latest" release for this branch
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}-latest
+          name: "${{ github.ref_name }} (latest build)"
+          target_commitish: ${{ github.sha }}
+          body: |
+            Latest automated build from commit ${{ github.sha }} on branch `${{ github.ref_name }}`.
+          files: firmware/*
+          prerelease: true
+          make_latest: false
