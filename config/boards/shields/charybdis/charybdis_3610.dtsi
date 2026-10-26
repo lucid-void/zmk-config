@@ -36,9 +36,9 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <2400>;
-        /* Previously CONFIG_PMW3610_SWAP_XY / _INVERT_X / _INVERT_Y */
-        swap-xy;
-        invert-x;
+        /* Axis orientation. Was swap-xy + invert-x + invert-y, i.e. (-y, -x);
+           now rotated 90 degrees to (x, -y). For the opposite 90 degree
+           direction use invert-x instead of invert-y. */
         invert-y;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
