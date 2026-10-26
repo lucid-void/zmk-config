@@ -34,5 +34,7 @@
 	
     kscan0: kscan {
         diode-direction = "row2col";
+        /* Lets a keypress wake the half from deep sleep (ZMK_SLEEP). */
+        wakeup-source;
     };
 };
