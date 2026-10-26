@@ -43,5 +43,9 @@
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
+        /* Stay in RUN mode while ZMK is active; otherwise the sensor downshifts
+           to slow REST sampling after a short pause and the first movement
+           afterwards lags. Normal downshift resumes when ZMK goes idle. */
+        force-awake;
     };
 };
