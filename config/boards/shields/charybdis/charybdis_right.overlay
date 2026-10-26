@@ -26,11 +26,6 @@
 		, <&pro_micro 5 GPIO_ACTIVE_HIGH>
 		, <&pro_micro 4 GPIO_ACTIVE_HIGH>
 		, <&pro_micro 9 GPIO_ACTIVE_HIGH>
-		/* Row 4: large (4x6) variant's 4th main row. pro_micro 21 =
-		   AVR F4, per Bastardkb's reference Elite-C matrix_pins
-		   (rows: F4, F7, C6, D4, B5) -- verify against your board's
-		   silkscreen/schematic if unsure. */
-		, <&pro_micro 21 GPIO_ACTIVE_HIGH>
 		;
 };
 
