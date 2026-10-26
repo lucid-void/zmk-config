@@ -44,7 +44,7 @@
 };
 
 /* Replaces the zmk-input-behavior-listener nodes from charybdis.keymap.
-   Layer indices: 0 Base, 1 Lower, 2 Raise, 3 Game, 4 Game ++, 5 Mouse. */
+   Layer indices: 0 Base, 1 Nav, 2 Sym, 3 Game, 4 Game ++, 5 Mouse. */
 / {
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
@@ -54,7 +54,7 @@
            (was scale-divisor 4 + &ib_toggle_layer 5, time-to-live-ms 750). */
         input-processors = <&zip_xy_scaler 1 4>, <&zip_temp_layer 5 750>;
 
-        /* Lower layer: trackball scrolls vertically, inverted, 1/16 scale
+        /* Nav layer: trackball scrolls vertically, inverted, 1/16 scale
            (was trackball_scroll_listener + &ib_wheel_scaler 1 16, y-invert).
            Overrides replace the default processors, so no auto-mouse here. */
         scroller {
